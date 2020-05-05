@@ -1,12 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, UseGuards } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create_task.dto';
 import { GetTasksFilterDto } from './dto/get_task_filter.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TaskRepository } from './task.repository';
 import { Task } from './task.entity';
 import { TaskStatus } from './task.status.model';
+import { AuthGuard } from '@nestjs/passport';
 
 @Injectable()
+@UseGuards(AuthGuard())
 export class TasksService {
     constructor(
         @InjectRepository(TaskRepository)
